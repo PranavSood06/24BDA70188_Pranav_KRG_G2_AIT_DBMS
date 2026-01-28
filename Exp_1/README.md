@@ -22,34 +22,33 @@ The database is designed with data integrity, normalization, and security in min
 Stores information about books available in the library.
 
 **Columns:**
-
-* `ID` (INT, PRIMARY KEY)
-* `NAME` (VARCHAR(20), NOT NULL)
-* `AUTHOR_NAME` (VARCHAR(20), NOT NULL)
-* `COUNT` (INT, CHECK COUNT >= 1)
-
+```sql
+	ID INT PRIMARY KEY,
+	NAME VARCHAR(20) NOT NULL,
+	AUTHOR_NAME VARCHAR(20) NOT NULL
+```
 ### 2. LIBRARY_VISITOR_USER Table
 
 Stores details of users who visit the library.
 
 **Columns:**
-
-* `USER_ID` (INT, PRIMARY KEY)
-* `USER_NAME` (VARCHAR(20))
-* `AGE` (INT, NOT NULL, CHECK AGE >= 17)
-* `EMAIL` (VARCHAR(30), UNIQUE)
-
+```sql
+    USER_ID INT PRIMARY KEY,
+	USER_NAME VARCHAR(20),
+	AGE INT CHECK(AGE>=17) NOT NULL,
+	EMAIL VARCHAR(20) UNIQUE NOT NULL
+```
 ### 3. BOOK_ISSUE Table
 
 Tracks the books issued to users.
 
 **Columns:**
-
-* `BOOK_ISSUE_ID` (INT, PRIMARY KEY)
-* `BOOK_ID` (INT, FOREIGN KEY REFERENCES BOOKS(ID))
-* `USER_ID` (INT, FOREIGN KEY REFERENCES LIBRARY_VISITOR_USER(USER_ID))
-* `BOOK_ISSUE` (DATE, NOT NULL)
-
+```sql
+    BOOK_ISSUE_ID INT PRIMARY KEY,
+	BOOK_ID INT REFERENCES BOOKS(ID) NOT NULL,
+	USER_ID INT REFERENCES LIBRARY_VISITOR_USER(USER_ID) NOT NULL,
+	BOOK_ISSUE DATE NOT NULL
+```
 ## SQL Operations Performed
 
 ### DDL (Data Definition Language)
